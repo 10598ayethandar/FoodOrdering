@@ -1,0 +1,51 @@
+﻿@model IPagedList<FoodOrdering.Models.Food>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "IndexDelivery";
+}
+
+<h2 style="color:purple;background-color:darkgoldenrod;font-family:'Goudy Stout';font-size:20px;">Available Food List</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-8">
+            @using (Html.BeginForm("IndexDelivery", "Menu", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="input-group-right">
+                    @Html.TextBox("search", null, new { placeholder = "Search" })
+                    <span class="input-group-prepend">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<hr />
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-3" style="padding:30px;">
+                <img src="@Url.Content(item.ImagePath)" class="img-thumbnail" style="width:200px;height:200px;" />
+                <br />
+
+                @Html.DisplayNameFor(model => model.First().Id):
+                @Html.DisplayFor(modelItem => item.Id)<br />
+                @Html.DisplayNameFor(model => model.First().Name):
+                @Html.DisplayFor(modelItem => item.Name)<br />
+                @Html.DisplayNameFor(model => model.First().Catagories):
+                @Html.DisplayFor(modelItem => item.Catagories)<br />
+                @Html.DisplayNameFor(model => model.First().Price):
+                @Html.DisplayFor(modelItem => item.Price)<br /><br />
+                 <a href="@Url.Action("Order", "Orderingcart",new { id = item.Id })" class="btn btn-info">Order Now</a>
+            </div>
+        }
+    </div>
+
+</div>
+<p>@Html.PagedListPager(Model, page => Url.Action("IndexDelivery", new { page, search = Request.QueryString["search"] }))</p>
+

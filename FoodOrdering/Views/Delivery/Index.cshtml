@@ -1,0 +1,25 @@
+﻿
+
+
+@{
+    ViewBag.Title = "Order Online";
+}
+<head>
+    <style>
+
+        .bb {
+            float: right;
+        }
+    </style>
+</head>
+<h2>Order Online</h2>
+<body>
+    <div class="aa">
+        <a href="@Url.Action("Login","Login")"><p style="font-family:'Goudy Stout';font-size:20px;">Delivery</p><img src="~/Image/delivery.png" style="width:200px;height:200px;" /></a>
+    </div>
+
+    <div class="bb">
+        <a href="@Url.Action("IndexDelivery","Menu")"><p style="font-family:'Goudy Stout';font-size:20px;">Pick Up</p><img src="~/Image/pickup.png" style="width:200px;height:200px" /></a>
+    </div>
+</body>
+
